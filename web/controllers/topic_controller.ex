@@ -12,5 +12,7 @@ defmodule Discuss.TopicController do
     # changeset = Discuss.Topic.changeset(struct, params)
 
     changeset = Topic.changeset(%Topic{}, %{})
+
+    render conn, "new.html", changeset: changeset  # plucked from templates/topic folder
   end
 end

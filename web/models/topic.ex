@@ -5,9 +5,10 @@ defmodule Discuss.Topic do
     field :title, :string
   end
 
+  # \\ %{} defines default params to be empty struct
   def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:title])
+    struct # represents a record
+    |> cast(params, [:title]) # produces a changeset
     |> validate_required([:title])
   end
 end

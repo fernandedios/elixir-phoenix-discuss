@@ -3,6 +3,11 @@ defmodule Discuss.TopicController do
 
   alias Discuss.Topic
 
+  def index(conn, _params) do
+    topics = Repo.all(Topic)
+    render conn, "index.html", topics: topics
+  end
+
   def new(conn, _params) do
     # IO.inspect conn
     # IO.inspect params
@@ -12,12 +17,11 @@ defmodule Discuss.TopicController do
     # changeset = Discuss.Topic.changeset(struct, params)
 
     changeset = Topic.changeset(%Topic{}, %{})
-
     render conn, "new.html", changeset: changeset  # plucked from templates/topic folder
   end
 
-  #def create(conn, params) do
-    # IO.inspect params
+  # def create(conn, params) do
+  # IO.inspect params
 
   def create(conn, %{"topic" => topic}) do
     changeset = Topic.changeset(%Topic{}, topic)
@@ -26,7 +30,7 @@ defmodule Discuss.TopicController do
       # {:ok, post} -> IO.inspect(post)
       # {:error, changeset} -> IO.inspect(changeset)
 
-      {:ok, post} ->
+      {:ok, post} -> IO.inspect(post)
       {:error, changeset} -> IO.inspect(post)
         render conn, "new.html", changeset: changeset
     end

@@ -30,8 +30,8 @@ defmodule Discuss.TopicController do
       # {:ok, post} -> IO.inspect(post)
       # {:error, changeset} -> IO.inspect(changeset)
 
-      {:ok, post} -> IO.inspect(post)
-      {:error, changeset} -> IO.inspect(post)
+      {:ok, topic} -> IO.inspect(topic)
+      {:error, changeset} -> 
         render conn, "new.html", changeset: changeset
     end
   end

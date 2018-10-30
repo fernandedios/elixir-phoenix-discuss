@@ -30,9 +30,14 @@ defmodule Discuss.TopicController do
       # {:ok, post} -> IO.inspect(post)
       # {:error, changeset} -> IO.inspect(changeset)
 
-      {:ok, topic} -> IO.inspect(topic)
-      {:error, changeset} -> 
+      {:ok, post} ->
+        conn
+        |> put_flash(:info, "Topic Created") # flash success message
+        |> redirect(to: topic_path(conn, :index)) # redirect to index
+      {:error, changeset} ->
         render conn, "new.html", changeset: changeset
     end
+
   end
+
 end

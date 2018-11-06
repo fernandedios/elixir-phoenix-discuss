@@ -8,5 +8,6 @@
 
 .form-group {
   position: relative;
+  margin-top: 3px;
   margin-bottom: 25px;
 }

@@ -29,11 +29,11 @@ import_config "#{Mix.env}.secret.exs"
 
 client_secret = Application.get_env(:discuss, :client_secret)
 
-config :ueberauth, Uberauth,
+config :ueberauth, Ueberauth,
   providers: [
     github: { Ueberauth.Strategy.Github, [] }
   ]
 
-config :ueberauth, Ueberauth.Strategy.Github.Oauth,
+config :ueberauth, Ueberauth.Strategy.Github.OAuth,
   client_id: "758884a2a68a5288bab3",
   client_secret: client_secret

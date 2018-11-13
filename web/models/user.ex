@@ -1,5 +1,5 @@
 defmodule Discuss.User do
-  use Discuss.Web, :model,
+  use Discuss.Web, :model
 
   schema "users" do
     field :email, :string

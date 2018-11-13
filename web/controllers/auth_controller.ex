@@ -20,7 +20,7 @@ defmodule Discuss.AuthController do
 
   # private
   defp signin(conn, changeset) do
-    case insert_or_update(changeset) do
+    case insert_or_update_user(changeset) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Welcome back!")
@@ -37,7 +37,7 @@ defmodule Discuss.AuthController do
   # private function
   defp insert_or_update_user(changeset) do
     # check if user exists
-    case Repo.get_by(User, email: changeser.changes.email) do
+    case Repo.get_by(User, email: changeset.changes.email) do
       nil ->
         Repo.insert(changeset)
       user ->

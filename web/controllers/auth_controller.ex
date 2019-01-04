@@ -12,9 +12,12 @@ defmodule Discuss.AuthController do
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
     # IO.inspect(auth)
 
-    user_params = %{token: auth.credentials.token, email: auth.info.email, provider: "github"}
+    user_params = %{
+      token: auth.credentials.token,
+      email: auth.info.email,
+      provider: params.provider
+    }
     changeset = User.changeset(%User{}, user_params)
-
     signin(conn, changeset)
   end
 
@@ -26,7 +29,6 @@ defmodule Discuss.AuthController do
         |> put_flash(:info, "Welcome back!")
         |> put_session(:user_id, user.id)
         |> redirect(to: topic_path(conn, :index))
-
       {:error, _reason} ->
         conn
         |> put_flash(:error, "Error signing in")

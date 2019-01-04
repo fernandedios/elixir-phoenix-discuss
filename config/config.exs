@@ -27,13 +27,13 @@ config :logger, :console,
 import_config "#{Mix.env}.exs"
 import_config "#{Mix.env}.secret.exs"
 
-client_secret = Application.get_env(:discuss, :client_secret)
+# client_secret = Application.get_env(:discuss, :client_secret)
 
 config :ueberauth, Ueberauth,
   providers: [
-    github: { Ueberauth.Strategy.Github, [] }
+    github: { Ueberauth.Strategy.Github, [default_scope: "user,public_repo"]}
   ]
 
 config :ueberauth, Ueberauth.Strategy.Github.OAuth,
   client_id: "758884a2a68a5288bab3",
-  client_secret: client_secret
+  client_secret: "47637107e30360fca2f7f7dde6d399a88b0a81f3" #client_secret

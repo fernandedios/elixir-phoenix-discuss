@@ -21,6 +21,12 @@ defmodule Discuss.AuthController do
     signin(conn, changeset)
   end
 
+  def signout(conn, _params) do
+    conn
+    |> configure_session(drop: true) # remove all session data
+    |> redirect(to: topic_path(conn, :index)) # redirect to index 
+  end
+
   # private
   defp signin(conn, changeset) do
     case insert_or_update_user(changeset) do

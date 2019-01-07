@@ -3,6 +3,7 @@ defmodule Discuss.Topic do
 
   schema "topics" do
     field :title, :string
+    belongs_to :user, Discuss.User # topic is owned by 1 user
   end
 
   # \\ %{} defines default params to be empty struct

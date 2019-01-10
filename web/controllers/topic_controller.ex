@@ -28,7 +28,10 @@ defmodule Discuss.TopicController do
   # IO.inspect params
 
   def create(conn, %{"topic" => topic}) do
-    changeset = Topic.changeset(%Topic{}, topic)
+    # associate topic to user
+    changeset = conn.assigns.user
+    |> build_assoc(:topics) # returns a topic struct
+    |> Topic.changeset(topic)
 
     case Repo.insert(changeset) do
       # {:ok, topic} -> IO.inspect(topic)

@@ -15,6 +15,12 @@ defmodule Discuss.TopicController do
     render conn, "index.html", topics: topics
   end
 
+  def show(conn, %{"id" => topic_id}) do
+    # failure to get, will show error thanks to get!
+    topic = Repo.get!(Topic, topic_id)
+    render conn, "show.html", topic: topic
+  end
+
   def new(conn, _params) do
     # IO.inspect conn
     # IO.inspect params
@@ -88,6 +94,7 @@ defmodule Discuss.TopicController do
   def check_topic_owner(conn, _params) do
     %{params: %{"id" => topic_id}} = conn
 
+    # fetch topic from db, compare user_id with logged in user's id
     if Repo.get(Topic, topic_id).user_id == conn.assigns.user.id do
       conn # return conn
     else

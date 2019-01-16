@@ -4,6 +4,7 @@ defmodule Discuss.Topic do
   schema "topics" do
     field :title, :string
     belongs_to :user, Discuss.User # topic is owned by 1 user
+    has_many :comments, Discuss.Comment # topic can have many comments
   end
 
   # \\ %{} defines default params to be empty struct

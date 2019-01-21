@@ -1,7 +1,7 @@
 defmodule Discuss.UserSocket do
   use Phoenix.Socket
 
-  # channel "room:*", Discuss.RoomChannel
+  channel "comments:*", Discuss.CommentsChannel
   transport :websocket, Phoenix.Transports.WebSocket
 
   def connect(_params, socket) do

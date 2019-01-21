@@ -1,5 +1,5 @@
 defmodule Discuss.Comment do
-  use Discss.Web, :model
+  use Discuss.Web, :model
 
   schema "comments" do
     field :content, :string

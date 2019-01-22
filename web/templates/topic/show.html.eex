@@ -1,6 +1,7 @@
 <%= @topic.title %>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+    // <%= @topic.id %> is elixir code
     window.createSocket(<%= @topic.id %>);
   });
 </script>

@@ -1,7 +1,7 @@
 defmodule Discuss.CommentsChannel do
   use Discuss.Web, :channel
 
-  alias Discuss.Topic
+  alias Discuss.{Topic, Comment} # alias Topic and Comment
 
   # "comments:" <> topic_id
   # pull id and assign as topic_id
@@ -15,7 +15,7 @@ defmodule Discuss.CommentsChannel do
   end
 
   # pattern matching to extract "content" from 2nd param
-  def handle_in(name, %("content" => content), socket) do
+  def handle_in(name, %{"content" => content}, socket) do
     # extract topic from socket
     topic = socket.assigns.topic
 
@@ -25,9 +25,9 @@ defmodule Discuss.CommentsChannel do
 
     case Repo.insert(changeset) do
       {:ok, comment} ->
-        {:reply, :ok, socket}
+        {:reply, :ok, socket} # success
       {:error, _reason} ->
-        {:reply, {:error, %{errors: changeset}}, socket}
+        {:reply, {:error, %{errors: changeset}}, socket} # error
     end
   end
 end

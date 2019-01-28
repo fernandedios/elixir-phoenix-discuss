@@ -9,7 +9,7 @@ defmodule Discuss.Comment do
     timestamps()
   end
 
-  def changeser(struct, params \\ %{}) do
+  def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:content]) # take content from params, produce new changeset
     |> validate_required([:content]) # make content required field

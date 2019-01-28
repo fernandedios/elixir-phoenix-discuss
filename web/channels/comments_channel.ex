@@ -8,10 +8,13 @@ defmodule Discuss.CommentsChannel do
   # topic_id is a string
   def join("comments:" <> topic_id, _params, socket) do
     topic_id = String.to_integer(topic_id) # convert to int
-    topic = Repo.get(Topic, topic_id)
 
-    # assign topic inside socket
-    {:ok, %{}, assign(socket, :topic, topic)}
+    topic = Topic
+      |> Repo.get(topic_id) # get topic using given topic_id
+      |> Repo.preload(:comments) # get all comments associated with the topic
+
+    # return comments, assign topic inside socket
+    {:ok, %{comments: topic.comments}, assign(socket, :topic, topic)}
   end
 
   # pattern matching to extract "content" from 2nd param

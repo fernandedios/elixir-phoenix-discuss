@@ -27,10 +27,17 @@ defmodule Discuss.CommentsChannel do
       |> Comment.changeset(%{content: content})
 
     case Repo.insert(changeset) do
+      # success
       {:ok, comment} ->
-        {:reply, :ok, socket} # success
+        # notify everyone subscribed
+        # ! makes sure we're notified if something goes wrong
+        # 2nd arg is the event name
+        broadcast!(socket, "comments:#{socket.assogns.topic.id}:new", %{comment: comment})
+        {:reply, :ok, socket}
+
+      # error
       {:error, _reason} ->
-        {:reply, {:error, %{errors: changeset}}, socket} # error
+        {:reply, {:error, %{errors: changeset}}, socket}
     end
   end
 end

@@ -1,6 +1,8 @@
 import {Socket} from "phoenix"
 
+// use userToken when generating socket
 let socket = new Socket("/socket", {params: {token: window.userToken}})
+
 socket.connect();
 
 const createSocket = (topicId) => {

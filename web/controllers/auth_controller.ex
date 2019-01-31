@@ -9,7 +9,7 @@ defmodule Discuss.AuthController do
     # IO.inspect(params)
   # end
 
-  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
     # IO.inspect(auth)
 
     user_params = %{
@@ -24,7 +24,7 @@ defmodule Discuss.AuthController do
   def signout(conn, _params) do
     conn
     |> configure_session(drop: true) # remove all session data
-    |> redirect(to: topic_path(conn, :index)) # redirect to index 
+    |> redirect(to: topic_path(conn, :index)) # redirect to index
   end
 
   # private

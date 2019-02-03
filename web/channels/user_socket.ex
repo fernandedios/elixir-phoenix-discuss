@@ -10,8 +10,8 @@ defmodule Discuss.UserSocket do
     case Phoenic.Token.verify(socket, "key", token) do # decode token
       # valid token
       {:ok, user_id} ->
-        {:ok, assign(socket, :user_id, user_id)}
-        
+        {:ok, assign(socket, :user_id, user_id)} # add user_id to socket object
+
       # error decoding
       {:error, _error} ->
         :error

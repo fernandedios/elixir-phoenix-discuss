@@ -7,7 +7,7 @@ defmodule Discuss.UserSocket do
   # "token" is a string since it's from a json data
   def connect(%{"token" => token}, socket) do
     # IO.puts token
-    case Phoenic.Token.verify(socket, "key", token) do # decode token
+    case Phoenix.Token.verify(socket, "key", token) do # decode token
       # valid token
       {:ok, user_id} ->
         {:ok, assign(socket, :user_id, user_id)} # add user_id to socket object

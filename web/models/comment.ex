@@ -1,9 +1,9 @@
 defmodule Discuss.Comment do
   use Discuss.Web, :model
 
-  # instruct Poison Encoder to only conver :content
+  # instruct Poison Encoder to only convert content and user
   # Poison.Encoder converts model to json for socket communication
-  @derive {Poison.Encoder, only: [:content]}
+  @derive {Poison.Encoder, only: [:content, :user]}
 
   schema "comments" do
     field :content, :string

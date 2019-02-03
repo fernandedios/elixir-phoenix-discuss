@@ -11,7 +11,8 @@ defmodule Discuss.CommentsChannel do
 
     topic = Topic
       |> Repo.get(topic_id) # get topic using given topic_id
-      |> Repo.preload(:comments) # get all comments associated with the topic
+       # get all comments associated with the topic, get corresponding user for each
+      |> Repo.preload(comments: [:user])
 
     # return comments, assign topic inside socket
     {:ok, %{comments: topic.comments}, assign(socket, :topic, topic)}

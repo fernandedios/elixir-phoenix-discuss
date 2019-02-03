@@ -1,6 +1,10 @@
 defmodule Discuss.User do
   use Discuss.Web, :model
 
+  # instruct Poison Encoder to only convert email
+  # Poison.Encoder converts model to json for socket communication
+  @derive {Poison.Encoder, only: [:email]}
+
   schema "users" do
     field :email, :string
     field :provider, :string
